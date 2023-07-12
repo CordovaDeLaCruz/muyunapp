@@ -1,0 +1,139 @@
+<ng-container  *ngIf="!showSpinner">
+  <h2>{{isView ? 'Datos de la ' :  routeId ? 'Actualizar ' :'Agregar '}} Ruta</h2>
+  <form
+    [formGroup]="form"
+    fxLayout="column"
+    fxLayoutAlign="center"
+  >
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Nombre de la ruta</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Ingrese el nombre de la ruta</mat-label>
+          <input
+            type="text"
+            autocomplete="off"
+            formControlName="pathName"
+            matInput
+          />
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('pathName')"
+              labelName="Nombre de la ruta"
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Cantidad de kilómetros</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Ingrese la cantidad de kilómetros</mat-label>
+          <input
+            type="text"
+            autocomplete="off"
+            formControlName="kilometer"
+            matInput
+            (keypress)="setInputPattern($event, 'decimalPercentages')"
+            [pattern]="
+              setValidatorPattern(
+                'decimalPercentages',
+                true,
+                true
+              )
+            "
+          />
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('kilometer')"
+              labelName="Cantidad de kilómetros"
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column" style="margin-top: 5px;">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <input
+          type="file"
+          accept="*/*"
+          (change)="onFileSelected($event)"
+          class="file-input"
+          #fileUpload
+        />
+        <p fxFlex="10%" style="margin-right: 1%;margin-bottom: 0;">Archivo GeoJson</p>
+        <button
+          fxFlex="89%"
+          type="button"
+          (click)="fileUpload.click()"
+          mat-raised-button
+          color="accent"
+          *ngIf="!fileGeoJsonName"
+        >
+          Ingresar el archivo GeoJson
+        </button>
+        <div fxFlex="89%" class="container-img" *ngIf="fileGeoJsonName">
+          <p>{{fileGeoJsonName}}</p>
+          <mat-icon  *ngIf="!isView" (click)="removeFile()" style="cursor: pointer;margin-left: 20px;">close</mat-icon>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div fxLayout="column" class="mt-7" style="margin-bottom: 30px;" *ngIf="!isView">
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="100px">
+      <div fxFlex="50" fxLayoutAlign="end">
+        <button
+          [disabled]="isLoading"
+          routerLink="/route"
+          class="action__button"
+          mat-raised-button
+          color="link"
+        >
+          Cancelar
+        </button>
+      </div>
+      <div fxFlex="50" fxLayoutAlign="start">
+        <button
+          [disabled]="routeId ? (form.invalid || isLoading) : (form.invalid || !fileGeoJsonName || isLoading) "
+          (click)="submit()"
+          class="btn_style action__button d-flex justify-content-center"
+          mat-raised-button
+          color="primary"
+        >
+          <span *ngIf="!isLoading"> {{routeId ? 'Actualizar ' :'Agregar '}} Ruta</span>
+          <div class="root__container__spinner" *ngIf="isLoading">
+            <mat-spinner
+              *ngIf="isLoading"
+              [diameter]="25"
+              class="mat-spinner-color-components-send mx-auto"
+            ></mat-spinner>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<div class="root__container__spinner" *ngIf="showSpinner && routeId">
+  <div class="contarier__spinner d-flex justify-content-center">
+    <div style="display: block;">
+    <mat-spinner [diameter]="100" class="mat-spinner-color-components" style="margin: auto;"></mat-spinner>
+    <h2 class="text__spinner">Cargando Datos ...</h2>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,131 @@
+fieldset.groupbox-border {
+  border: 2px solid #E8E8E8 !important;
+  background-color: #FFFFFF;
+  border-radius: 4px;
+  -webkit-box-shadow:  0px 0px 0px 0px #000;
+          box-shadow:  0px 0px 0px 0px #000;
+}
+
+legend.groupbox-border {
+  font-size: 12px!important;
+  color: #505256!important;
+  text-align: left !important;
+  width:auto;
+  padding:0px 10px 0px 10px;
+  border-bottom:none;
+}
+legend{
+  float: inherit!important;
+  padding-left: 15px!important;
+}
+.container__fieldSet{
+  padding: 0 0px 5px;
+  height: 130px;
+}
+.filter__input {
+  align-items: center !important;
+}
+:host ::ng-deep .filter__input .mat-form-field-wrapper {
+  margin-bottom: -1.25em;
+}
+.btn-style {
+  height: 45px;
+  margin-top: 10px;
+  max-width: 200px;
+  width: 100%;
+}
+
+.mat-select-space {
+  width: calc(100% - 80px);
+}
+
+table {
+  width: 100%;
+}
+
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+}
+
+.mat-row:hover .mat-cell {
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+
+
+pagination-template {
+  display: flex;
+}
+
+pagination-template > div {
+  margin: 0 5px;
+  padding: 5px 0px;
+  border-radius: 3px;
+
+  text-align: center;
+  cursor: pointer;
+}
+pagination-template > div > a {
+  text-decoration: none;
+}
+.container__number__page {
+  background: #ffffff;
+  color: #505256;
+  border: 1px solid #ededed;
+  width: 34px;
+  height: 34px;
+  padding: 5px 12px;
+}
+pagination-template > div > a:hover {
+  text-decoration: none;
+  color: #505256;
+}
+.pagination-next {
+  background: none !important;
+  border: none !important;
+  width: 100px !important;
+  height: 34px;
+  a {
+    align-items: center;
+    display: flex;
+  }
+}
+.pagination-previous {
+  background: none !important;
+  border: none !important;
+  width: 75px !important;
+  height: 34px;
+  a {
+    align-items: center;
+    display: flex;
+  }
+}
+.current {
+  background: #505256 !important;
+  color: #ffffff !important;
+  border-radius: 3px;
+  width: 34px;
+  height: 34px;
+  text-align: center;
+}
+.container__pagination {
+  justify-content: center;
+  margin-top: 21px;
+}
+
+::ng-deep .mat-select-design .mat-form-field-wrapper {
+  padding-bottom: 0!important;
+}
+@media (max-width: 992px) {
+  .btn-style {
+    margin-right: 12px;
+  }
+  .col-lg-6 {
+    padding-left: 0;
+    margin-bottom: 12px;
+  }
+}

@@ -1,0 +1,120 @@
+<h1>Rutas</h1>
+<div class="row container-filters" fxLayoutAlign="end end">
+  <div
+    class="col-lg-4"
+    fxLayout="row"
+    fxLayoutAlign="end end"
+    fxFlex.xs="100%"
+    style="padding: 0"
+    >
+      <button
+        [routerLink]="'add-route'"
+        class="btn-style full-width"
+        mat-raised-button
+        color="accent"
+      >
+        Nueva Ruta
+      </button>
+  </div>
+</div>
+<div class="mt-7" fxLayout="column">
+  <div fxFlex="100%">
+    <table mat-table [dataSource]="routeList" class="mat-elevation-z4">
+      <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.pathName ? element.pathName : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="kilometer">
+        <th mat-header-cell *matHeaderCellDef>Kilometro</th>
+        <td mat-cell *matCellDef="let element" class="no-select">
+          {{ element.kilometer ? element.kilometer : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon class="pointer" (click)="gotToEditRoute(element.id)">edit</mat-icon
+          >
+          <mat-icon
+            class="ml-2 pointer"
+            (click)="openModalDelete(element.id)"
+            >delete</mat-icon
+          >
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        (dblclick)="detailRoute(row)"
+      ></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="9999" style="text-align: center;">
+          No hay rutas existentes con los filtros aplicados
+        </td>
+      </tr>
+    </table>
+    <!-- <mat-paginator
+      class="mat-elevation-z4 mt-1"
+      [length]="usersLength"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      (nextPage)="changePage()"
+      aria-label="Seleccionar página"
+    >
+    </mat-paginator> -->
+    <pagination-template
+      class="container__pagination"
+      *ngIf="pages | paginate: { itemsPerPage: 1, currentPage: page }"
+      #pagination="paginationApi"
+      [maxSize]="5"
+      (pageChange)="onPageEvent($event)"
+    >
+      <div
+        *ngIf="!pagination.isFirstPage()"
+        (click)="pagination.previous()"
+        class="pagination-previous"
+        [class.disabled]="pagination.isFirstPage()"
+      >
+        <a>
+          <mat-icon class="mat-18"> keyboard_arrow_left </mat-icon>
+          Atrás
+        </a>
+      </div>
+      <div
+        *ngFor="let page of pagination.pages"
+        [class.current]="pagination.getCurrent() === page.value"
+      >
+        <a
+          class="container__number__page"
+          (click)="pagination.setCurrent(page.value)"
+          *ngIf="pagination.getCurrent() !== page.value"
+        >
+          <span>{{ page.label }}</span>
+        </a>
+        <div *ngIf="pagination.getCurrent() === page.value">
+          <span>{{ page.label }}</span>
+        </div>
+      </div>
+      <div
+        class="pagination-next"
+        *ngIf="!pagination.isLastPage()"
+        (click)="pagination.next()"
+        [class.disabled]="pagination.isLastPage()"
+      >
+        <a>
+          Siguiente
+          <mat-icon class="mat-18"> keyboard_arrow_right </mat-icon>
+        </a>
+      </div>
+    </pagination-template>
+  </div>
+</div>

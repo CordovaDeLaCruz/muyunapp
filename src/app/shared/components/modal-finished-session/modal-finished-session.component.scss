@@ -1,0 +1,38 @@
+.main__correct{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+  text-align: center;
+
+  .icon-display {
+    transform: scale(2);
+ }
+}
+
+.text__success{
+  margin: 24px 0 20px;
+  font-size: 19px!important;
+}
+.container__select, .container__btn{
+  display: flex;
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  justify-content: space-around;
+}
+.btn__generate{
+  width: 100%;
+  height: 44px;
+  background-color: #F23136;
+  border: 1px solid #EF575B;
+  color: #FFFFFF;
+  border-radius: 25px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  // font-size: 18px!important;
+}

@@ -1,0 +1,22 @@
+<mat-nav-list>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/user"
+    ><mat-icon>person</mat-icon> Usuarios</a
+  >
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/specie"
+    ><mat-icon>bug_report</mat-icon> Especies</a
+  >
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/travel"
+    ><mat-icon>content_copy</mat-icon> Registro de Especies por Recorrido</a
+  >
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/route"
+    ><mat-icon>adjust</mat-icon> Rutas</a
+  >
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/story"
+    ><mat-icon>theaters</mat-icon> Historias</a
+  >
+  <div [ngClass]="appropriateClass">
+    <a mat-list-item (click)="logout()"
+      > <mat-icon>exit_to_app</mat-icon>Cerrar Sesión</a
+    >
+  </div>
+</mat-nav-list>

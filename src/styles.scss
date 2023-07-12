@@ -1,0 +1,108 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.errorSnackBar {
+  background-color: #F23136 !important;
+  color: white !important;
+  margin-bottom: 50px !important;
+
+  .mat-simple-snackbar-action {
+    color: white !important;
+  }
+}
+
+
+.full-width {
+  width: 100%;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.row {
+  margin: 0;
+}
+ul {
+  margin: 0;
+}
+
+button:focus {
+  outline: none !important;
+}
+
+.mx-auto{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@for $i from 1 through 20 {
+  .mt-#{$i} {
+    margin-top: 0.3rem * $i;
+  }
+  .mb-#{$i} {
+    margin-bottom: 0.3rem * $i;
+  }
+  .ml-#{$i} {
+    margin-left: 0.3rem * $i;
+  }
+  .mr-#{$i} {
+    margin-right: 0.3rem * $i;
+  }
+  .mx-#{$i} {
+    margin-right: 0.3rem * $i;
+    margin-left: 0.3rem * $i;
+  }
+  .my-#{$i} {
+    margin-bottom: 0.3rem * $i;
+    margin-top: 0.3rem * $i;
+  }
+  .ma-#{$i} {
+    margin: 0.3rem * $i;
+  }
+  .pt-#{$i} {
+    padding-top: 0.3rem * $i;
+  }
+  .pb-#{$i} {
+    padding-bottom: 0.3rem * $i;
+  }
+  .pl-#{$i} {
+    padding-left: 0.3rem * $i;
+  }
+  .pr-#{$i} {
+    padding-right: 0.3rem * $i;
+  }
+  .px-#{$i} {
+    padding-left: 0.3rem * $i;
+    padding-right: 0.3rem * $i;
+  }
+  .py-#{$i} {
+    padding-top: 0.3rem * $i;
+    padding-bottom: 0.3rem * $i;
+  }
+  .pa-#{$i} {
+    padding: 0.3rem * $i;
+  }
+}

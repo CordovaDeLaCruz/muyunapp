@@ -1,0 +1,19 @@
+:host {
+  .mat-icon {
+    vertical-align: middle;
+    margin-right: 20px;
+  }
+}
+
+.bottomStick {
+  /*border-top:1px solid green;border-bottom:1px solid green;*/
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  a{
+    width: 100%;
+  }
+}
+.bottomRelative {
+  position: relative;
+}

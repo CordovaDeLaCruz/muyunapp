@@ -1,0 +1,807 @@
+<ng-container  *ngIf="(!showSpinner && specieId) || (!showSpinner && !specieId)">
+  <h2>{{isView ? 'Datos de la ' :  specieId ? 'Actualizar ' :'Agregar '}} Especie</h2>
+  <form
+    [formGroup]="form"
+    fxLayout="column"
+    fxLayoutAlign="center"
+  >
+    <div fxLayout="column" *ngIf="specieId">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Taxon ID</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Ingrese el Taxon ID</mat-label>
+          <input
+            type="text"
+            autocomplete="off"
+            formControlName="taxon_id"
+            matInput
+          />
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('taxon_id')"
+              labelName="Taxon ID"
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Nombre científico</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Ingrese el Nombre científico</mat-label>
+          <input
+            type="text"
+            autocomplete="off"
+            formControlName="scienticName"
+            matInput
+          />
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('scienticName')"
+              labelName="Nombre científico"
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Nombre vernacular esp.</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Ingrese el Nombre vernacular esp.</mat-label>
+          <input
+            type="text"
+            autocomplete="off"
+            formControlName="vernacularNameSpanish"
+            matInput
+          />
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('vernacularNameSpanish')"
+              labelName="Nombre vernacular esp."
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Nombre vernacular eng.</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Ingrese el Nombre vernacular eng.</mat-label>
+          <input
+            type="text"
+            autocomplete="off"
+            formControlName="vernacularNameEnglish"
+            matInput
+          />
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('vernacularNameEnglish')"
+              labelName="Nombre vernacular eng."
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Rank</p>
+        <mat-form-field fxFlex="89%" appearance="outline">
+          <mat-label>Rank a asignar</mat-label>
+          <mat-select formControlName="rankId">
+            <mat-option>
+              <strong>Seleccionar Rank</strong>
+            </mat-option>
+            <mat-option *ngFor="let rank of rankList" [value]="rank.id">
+              {{ rank.nameSpanish }} - {{ rank.nameEnglish }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('rankId')"
+              labelName="Rank"
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Kingdom</p>
+        <mat-form-field fxFlex="89%" appearance="outline">
+          <mat-label>Kingdom a asignar</mat-label>
+          <mat-select formControlName="kingdomId">
+            <mat-option>
+              <strong>Seleccionar Kingdom</strong>
+            </mat-option>
+            <mat-option *ngFor="let kingdom of kingdomList" [value]="kingdom.id">
+              {{ kingdom.nameSpanish }} - {{ kingdom.nameEnglish }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('kingdomId')"
+              labelName="Kingdom"
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Phylum</p>
+        <mat-form-field fxFlex="89%" appearance="outline">
+          <mat-label>Phylum a asignar</mat-label>
+          <mat-select formControlName="phylumId">
+            <mat-option>
+              <strong>Seleccionar Phylum</strong>
+            </mat-option>
+            <mat-option *ngFor="let phylum of phylumList" [value]="phylum.id">
+              {{ phylum.nameSpanish }} - {{ phylum.nameEnglish }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('phylumId')"
+              labelName="Phylum"
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Class</p>
+        <mat-form-field fxFlex="89%" appearance="outline">
+          <mat-label>Clase a asignar</mat-label>
+          <mat-select formControlName="classTaxonomyId">
+            <mat-option>
+              <strong>Seleccionar Clase</strong>
+            </mat-option>
+            <mat-option *ngFor="let class of classList" [value]="class.id">
+              {{ class.nameSpanish }} - {{ class.nameEnglish }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('classTaxonomyId')"
+              labelName="Class"
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Class esp.</p>
+        <mat-form-field fxFlex="89%" appearance="outline">
+          <mat-label>Class esp. a asignar</mat-label>
+          <input
+            type="text"
+            autocomplete="off"
+            formControlName="Clase_ESP"
+            matInput
+          />
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('Class')"
+              labelName="Class"
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Class eng.</p>
+        <mat-form-field fxFlex="89%" appearance="outline">
+          <mat-label>Class eng. a asignar</mat-label>
+          <input
+            type="text"
+            autocomplete="off"
+            formControlName="Clase_ENG"
+            matInput
+          />
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('Class')"
+              labelName="Class"
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Order</p>
+        <mat-form-field fxFlex="89%" appearance="outline">
+          <mat-label>Order a asignar</mat-label>
+          <mat-select formControlName="orderId">
+            <mat-option>
+              <strong>Seleccionar Order</strong>
+            </mat-option>
+            <mat-option *ngFor="let order of orderList" [value]="order.id">
+              {{ order.nameSpanish }} - {{ order.nameEnglish }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('orderId')"
+              labelName="Order"
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Family</p>
+        <mat-form-field fxFlex="89%" appearance="outline">
+          <mat-label>Family a asignar</mat-label>
+          <mat-select formControlName="familyId">
+            <mat-option>
+              <strong>Seleccionar Family</strong>
+            </mat-option>
+            <mat-option *ngFor="let family of familyList" [value]="family.id">
+              {{ family.nameSpanish }} - {{ family.nameEnglish }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('familyId')"
+              labelName="Family"
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Genus</p>
+        <mat-form-field fxFlex="89%" appearance="outline">
+          <mat-label>Genus a asignar</mat-label>
+          <mat-select formControlName="genusId" >
+            <mat-option>
+              <strong>Seleccionar Genus</strong>
+            </mat-option>
+            <mat-option *ngFor="let genus of genusList" [value]="genus.id">
+              {{ genus.nameSpanish }} - {{ genus.nameEnglish }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('genusId')"
+              labelName="Genus"
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Autorship</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Ingrese el Autorship</mat-label>
+          <input
+            type="text"
+            autocomplete="off"
+            formControlName="autorship"
+            matInput
+          />
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('autorship')"
+              labelName="Autorship"
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Prevalence</p>
+        <mat-form-field fxFlex="89%" appearance="outline">
+          <mat-label>Prevalence a asignar</mat-label>
+          <mat-select formControlName="prevalences" multiple>
+            <!-- <mat-option>
+              <strong>Seleccionar Prevalence</strong>
+            </mat-option> -->
+            <mat-option *ngFor="let prevalence of prevalenceList" [value]="prevalence.id">
+              {{ prevalence.nameSpanish }} - {{ prevalence.nameEnglish }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('prevalences')"
+              labelName="Prevalence"
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Hábitat ícono</p>
+        <mat-form-field fxFlex="89%" appearance="outline">
+          <mat-label>Hábitat ícono a asignar</mat-label>
+          <mat-select formControlName="habitatIcons" multiple>
+            <!-- <mat-option>
+              <strong>Seleccionar Hábitat ícono</strong>
+            </mat-option> -->
+            <mat-option *ngFor="let hIcon of habitatIconList" [value]="hIcon.id" (click)="selectHabitatIcon(hIcon)">
+              {{ hIcon.nameSpanish }} - {{ hIcon.nameEnglish }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('habitatIcons')"
+              labelName="Habitat ícono"
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Hábitat esp.</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Ingrese Hábitat esp.</mat-label>
+          <input
+            type="text"
+            autocomplete="off"
+            formControlName="habitatNameSpanish"
+            matInput
+          />
+          <mat-hint align="end"> máx. {{form.get('habitatNameSpanish').value ? form.get('habitatNameSpanish').value.length : '0'}} / 25 caracteres</mat-hint>
+
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('habitatNameSpanish')"
+              labelName="Habitat esp."
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Hábitat eng.</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Ingrese Hábitat eng.</mat-label>
+          <input
+            type="text"
+            autocomplete="off"
+            formControlName="habitatNameEnglish"
+            matInput
+            maxlength="25"
+          />
+          <mat-hint align="end"> máx. {{form.get('habitatNameEnglish').value ? form.get('habitatNameEnglish').value.length : '0'}} / 25 caracteres</mat-hint>
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('habitatNameEnglish')"
+              labelName="Habitat eng."
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Alimento Ícono</p>
+        <mat-form-field fxFlex="89%" appearance="outline">
+          <mat-label>Alimento Ícono a asignar</mat-label>
+          <mat-select formControlName="alimentIcons" multiple>
+            <!-- <mat-option>
+              <strong>Seleccionar Alimento ícono</strong>
+            </mat-option> -->
+            <mat-option *ngFor="let aliment of alimentIconList" [value]="aliment.id" (click)="selectAlimIcon(aliment)">
+              {{ aliment.nameSpanish }} - {{ aliment.nameEnglish }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('alimentIcons')"
+              labelName="Alimento"
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Alimento esp.</p>
+        <mat-form-field fxFlex="89%" appearance="outline">
+          <mat-label>Alimento esp. a asignar</mat-label>
+          <input
+            type="text"
+            autocomplete="off"
+            formControlName="alimentSpanish"
+            matInput
+          />
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('alimentSpanish')"
+              labelName="Alimento esp."
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Alimento eng.</p>
+        <mat-form-field fxFlex="89%" appearance="outline">
+          <mat-label>Alimento eng. a asignar</mat-label>
+          <input
+            type="text"
+            autocomplete="off"
+            formControlName="alimentEnglish"
+            matInput
+          />
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('alimentEnglish')"
+              labelName="Alimento eng."
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start start"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;margin-top: 20px;">Descripción esp.</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Ingrese Descripción esp.</mat-label>
+          <textarea
+            type="text"
+            autocomplete="off"
+            formControlName="descriptionNameSpanish"
+            matInput
+          ></textarea>
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('descriptionNameSpanish')"
+              labelName="Descripción esp."
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start start"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;margin-top: 20px;">Descripción eng.</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Ingrese Descripción eng.</mat-label>
+          <textarea
+            type="text"
+            autocomplete="off"
+            formControlName="descriptionNameEnglish"
+            matInput
+          >
+          </textarea>
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('descriptionNameEnglish')"
+              labelName="Descripción eng."
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Fact esp.</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Ingrese Fact esp.</mat-label>
+          <input
+            type="text"
+            autocomplete="off"
+            formControlName="factNameSpanish"
+            matInput
+          />
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('factNameSpanish')"
+              labelName="Fact esp."
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Fact eng.</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Ingrese Fact eng.</mat-label>
+          <input
+            type="text"
+            autocomplete="off"
+            formControlName="factNameEnglish"
+            matInput
+          />
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('factNameEnglish')"
+              labelName="Fact eng."
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Color</p>
+        <mat-form-field fxFlex="89%" appearance="outline">
+          <mat-label>Color a asignar</mat-label>
+          <mat-select formControlName="colors" multiple>
+            <!-- <mat-option>
+              <strong>Seleccionar Color</strong>
+            </mat-option> -->
+            <mat-option *ngFor="let color of colorList" [value]="color.id">
+              {{ color.nameSpanish }} - {{ color.nameEnglish }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('colors')"
+              labelName="Color"
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <p fxFlex="10%" style="margin-right: 1%;">Tamaño</p>
+        <mat-form-field fxFlex="89%" appearance="outline">
+          <mat-label>Tamaño a asignar</mat-label>
+          <mat-select formControlName="sizeId">
+            <mat-option>
+              <strong>Seleccionar Tamaño</strong>
+            </mat-option>
+            <mat-option *ngFor="let sizeSpecie of sizeSpecieList" [value]="sizeSpecie.id">
+              {{ sizeSpecie.typeSize }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            <app-validators-messages
+              [controlVar]="form.get('sizeId')"
+              labelName="Tamaño"
+            ></app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column" style="margin-top: 5px;">
+      <div
+        fxLayout="row"
+        fxLayout.xs="column"
+        fxFlex="100%"
+        fxLayoutAlign="start center"
+      >
+        <input
+          type="file"
+          accept="image/png, image/jpg, image/jpeg"
+          (change)="onFileSelected($event)"
+          class="file-input"
+          #fileUpload
+        />
+        <mat-checkbox
+          class="example-margin"
+          fxFlex="10%"
+          [formControl]="checkPhotoFormControl"
+          style="margin-right: 1%;"
+          [disabled] = "isView"
+          (click)="removeImage()"
+          >Foto</mat-checkbox
+        >
+        <button
+          fxFlex="89%"
+          type="button"
+          (click)="fileUpload.click()"
+          [disabled]="!checkPhotoFormControl.value"
+          mat-raised-button
+          color="accent"
+          *ngIf="!imageUrl"
+        >
+          Ingresar Foto
+        </button>
+        <div fxFlex="89%" class="container-img" *ngIf="imageUrl">
+          <img style="width: 250px;" [src]="imageUrl" [alt]="imageUrl" />
+          <mat-icon  *ngIf="!isView" (click)="removeImage()" style="cursor: pointer;margin-left: 20px;">close</mat-icon>
+        </div>
+      </div>
+
+      <!-- <div fxFlex="100%" fxLayout="column" *ngIf="imageUrl">
+        <div
+          fxLayout="row"
+          fxLayout.xs="column"
+          fxFlex="100%"
+          fxLayoutAlign="start center"
+        >
+          <p fxFlex="10%"></p>
+        </div>
+      </div> -->
+    </div>
+
+  </form>
+
+  <div fxLayout="column" class="mt-7" style="margin-bottom: 30px;" *ngIf="!isView">
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="100px">
+      <div fxFlex="50" fxLayoutAlign="end">
+        <button
+          [disabled]="isLoading"
+          routerLink="/specie"
+          class="action__button"
+          mat-raised-button
+          color="link"
+        >
+          Cancelar
+        </button>
+      </div>
+      <div fxFlex="50" fxLayoutAlign="start">
+        <button
+          [disabled]="form.invalid || !imageUrl"
+          (click)="submit()"
+          class="btn_style action__button d-flex justify-content-center"
+          mat-raised-button
+          color="primary"
+        >
+          <span *ngIf="!isLoading"> {{specieId ? 'Actualizar ' :'Agregar '}} Especie</span>
+          <div class="root__container__spinner" *ngIf="isLoading">
+            <mat-spinner
+              *ngIf="isLoading"
+              [diameter]="25"
+              class="mat-spinner-color-components-send mx-auto"
+            ></mat-spinner>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<div class="root__container__spinner" *ngIf="showSpinner && specieId">
+  <div class="contarier__spinner d-flex justify-content-center">
+    <div style="display: block;">
+    <mat-spinner [diameter]="100" class="mat-spinner-color-components" style="margin: auto;"></mat-spinner>
+    <h2 class="text__spinner">Cargando Datos ...</h2>
+    </div>
+  </div>
+</div>

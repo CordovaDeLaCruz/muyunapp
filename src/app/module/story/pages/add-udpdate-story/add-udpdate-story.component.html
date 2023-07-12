@@ -1,0 +1,164 @@
+<ng-container *ngIf="!showSpinner">
+  <h2>{{storyId ? 'Actualizar ' : 'Nueva '}} Historia</h2>
+  <form [formGroup]="form" fxLayout="column" fxLayoutAlign="center">
+
+    <div fxLayout="column">
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+        <p fxFlex="10%">Título Español:</p>
+        <mat-form-field fxFlex="90%" appearance="outline" class="full-width">
+          <mat-label>Ingrese el título en español</mat-label>
+          <input type="text" autocomplete="off" formControlName="titleSpanish" matInput />
+          <mat-error>
+            <app-validators-messages [controlVar]="form.get('titleSpanish')" labelName="Título Español">
+            </app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div fxLayout="column">
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+        <p fxFlex="10%">Título Inglés:</p>
+        <mat-form-field fxFlex="90%" appearance="outline" class="full-width">
+          <mat-label>Ingrese el título en inglés</mat-label>
+          <input type="text" autocomplete="off" formControlName="titleEnglish" matInput />
+          <mat-error>
+            <app-validators-messages [controlVar]="form.get('titleEnglish')" labelName="Título Inglés">
+            </app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div fxLayout="column">
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+        <p fxFlex="10%">Guía:</p>
+        <mat-form-field fxFlex="90%" appearance="outline">
+          <mat-label>Guía a asignar</mat-label>
+          <mat-select formControlName="guideId">
+            <mat-option *ngFor="let guide of guidesList" [value]="guide.id">
+              {{ guide.firstName }} {{ guide.lastName }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+            <app-validators-messages [controlVar]="form.get('guide')" labelName="Guía">
+            </app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div fxLayout="column">
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start start">
+        <p fxFlex="10%" style="margin-top: 20px;">Descripción Español:</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Ingrese Descripción Español</mat-label>
+          <textarea type="text" autocomplete="off" formControlName="descriptionSpanish" matInput></textarea>
+          <mat-error>
+            <app-validators-messages [controlVar]="form.get('descriptionSpanish')" labelName="Descripción Español">
+            </app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div fxLayout="column">
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+        <div *ngFor="let specie of speciesList">
+          <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+            <input type="text" autocomplete="off" value="{{specie.vernacularNameSpanish}}" [disabled]="true" matInput />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="column">
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start start">
+        <p fxFlex="10%" style="margin-top: 20px;">Descripción Inglés:</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Ingrese Descripción Inglés</mat-label>
+          <textarea type="text" autocomplete="off" formControlName="descriptionEnglsih" matInput></textarea>
+          <mat-error>
+            <app-validators-messages [controlVar]="form.get('descriptionEnglsih')" labelName="Descripción Inglés">
+            </app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div fxLayout="column">
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+        <div *ngFor="let specie of speciesList">
+          <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+            <input type="text" autocomplete="off" value="{{specie.vernacularNameEnglish}}" [disabled]="true" matInput />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="column">
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="center">
+        <div fxFlex="50" fxLayoutAlign="center">
+          <button fxFlex="50%" type="button" (click)="selectSpecie()" mat-raised-button color="primary">
+            Seleccionar Especie
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="column" style="margin-top: 20px;">
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+        <input type="file" accept="image/png, image/jpg, image/jpeg" (change)="onFileSelected($event)"
+          class="file-input" #fileUpload />
+        <mat-checkbox class="example-margin" fxFlex="10%" [formControl]="checkPhotoFormControl"
+          style="margin-right: 1%;" [disabled]="isView" (click)="removeImage()">Foto</mat-checkbox>
+        <button fxFlex="89%" type="button" (click)="fileUpload.click()" [disabled]="!checkPhotoFormControl.value"
+          mat-raised-button color="accent" *ngIf="!imageUrl">
+          Ingresar Foto
+        </button>
+        <div fxFlex="89%" class="container-img" *ngIf="imageUrl">
+          <img style="width: 250px;" [src]="imageUrl" [alt]="imageUrl" />
+          <mat-icon *ngIf="!isView" (click)="removeImage()" style="cursor: pointer;margin-left: 20px;">close</mat-icon>
+        </div>
+      </div>
+    </div>
+
+    <div fxLayout="column" style="margin-top: 20px;">
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+        <mat-checkbox class="example-margin" fxFlex="10%" style="margin-right: 1%;" formControlName="viewApp">Visualizar
+          en app</mat-checkbox>
+      </div>
+    </div>
+
+  </form>
+
+  <div fxLayout="column" class="mt-5">
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="100px">
+      <div fxFlex="50" fxLayoutAlign="end">
+        <button [disabled]="isLoading" routerLink="/story" class="action__button" mat-raised-button color="link">
+          Cancelar
+        </button>
+      </div>
+      <div fxFlex="50" fxLayoutAlign="start">
+        <button [disabled]="form.invalid || isLoading" (click)="submit()"
+          class="btn_style action__button d-flex justify-content-center" mat-raised-button color="primary">
+          <span *ngIf="!isLoading"> {{storyId ? 'Actualizar ' : 'Guardar '}}</span>
+          <div class="root__container__spinner" *ngIf="isLoading">
+            <mat-spinner *ngIf="isLoading" [diameter]="25" class="mat-spinner-color-components-send mx-auto">
+            </mat-spinner>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</ng-container>
+
+<div class="root__container__spinner" *ngIf="showSpinner && storyId">
+  <div class="contarier__spinner d-flex justify-content-center">
+    <div style="display: block;">
+      <mat-spinner [diameter]="100" class="mat-spinner-color-components" style="margin: auto;"></mat-spinner>
+      <h2 class="text__spinner">Cargando Datos ...</h2>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+.main{
+  &__container{
+    padding: 20px 0;
+    &__name{
+      text-align: right;
+      h2{
+        margin-bottom: 0;
+      }
+    }
+    h1{
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,101 @@
+.filter__input {
+  align-items: center !important;
+}
+
+:host ::ng-deep .filter__input .mat-form-field-wrapper {
+  margin-bottom: -1.25em;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+}
+
+.mat-row:hover .mat-cell {
+  background: rgba(0,0,0,.12);
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+
+
+pagination-template {
+  display: flex;
+}
+
+pagination-template > div {
+  margin: 0 5px;
+  padding: 5px 0px;
+  border-radius: 3px;
+
+  text-align: center;
+  cursor: pointer;
+}
+pagination-template > div > a {
+  text-decoration: none;
+}
+.container__number__page {
+  background: #ffffff;
+  color: #505256;
+  border: 1px solid #ededed;
+  width: 34px;
+  height: 34px;
+  padding: 5px 12px;
+}
+pagination-template > div > a:hover {
+  text-decoration: none;
+  color: #505256;
+}
+.pagination-next {
+  background: none !important;
+  border: none !important;
+  width: 100px !important;
+  height: 34px;
+  a {
+    align-items: center;
+    display: flex;
+  }
+}
+.pagination-previous {
+  background: none !important;
+  border: none !important;
+  width: 75px !important;
+  height: 34px;
+  a {
+    align-items: center;
+    display: flex;
+  }
+}
+.current {
+  background: #505256 !important;
+  color: #ffffff !important;
+  border-radius: 3px;
+  width: 34px;
+  height: 34px;
+  text-align: center;
+}
+.container__pagination {
+  justify-content: center;
+  margin-top: 21px;
+}
+.btn-style {
+  height: 45px;
+  margin-top: 10px;
+  max-width: 200px;
+  width: 100%;
+  border-color: #105378;
+  border-radius: 30px 30px 30px 30px;
+  background: #ee7aa3;
+  background-image: linear-gradient(180deg,#ee7aa3 0%,#ed407c 100%);
+  color: #470202;
+  font-size: 17px;
+}
+
+.btn-style:hover {
+  background-image: linear-gradient(180deg,#ed3b79 0%,#ee7aa3 100%);
+}

@@ -1,0 +1,215 @@
+<div *ngIf="obsertavionIdentifyFlag">
+  <h1>Registro Identificado</h1>
+  <form fxLayout="column" fxLayoutAlign="center" [formGroup]="form">
+    <div fxLayout="column">
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+        <p fxFlex="10%" style="margin-right: 1%;">Nombre Científico:</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Nombre científico</mat-label>
+          <input type="text" autocomplete="off" formControlName="scienticName" matInput />
+          <mat-error>
+            <app-validators-messages labelName="Nombre Científico" [controlVar]="form.get('scienticName')">
+            </app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+        <p fxFlex="10%" style="margin-right: 1%;">Nombre Vernacular:</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Nombre Vernacular</mat-label>
+          <input type="text" autocomplete="off" formControlName="vernacularNameSpanish" matInput />
+          <mat-error>
+            <app-validators-messages labelName="Nombre Vernacular" [controlVar]="form.get('vernacularNameSpanish')">
+            </app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+        <p fxFlex="10%" style="margin-right: 1%;">Cantidad:</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Cantidad</mat-label>
+          <input type="text" autocomplete="off" formControlName="individualCount" matInput />
+          <mat-error>
+            <app-validators-messages labelName="Cantidad" [controlVar]="form.get('individualCount')">
+            </app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <h3>Ubicación:</h3>
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+        <p fxFlex="10%" style="margin-right: 1%;">Longitud:</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Longitud</mat-label>
+          <input type="text" autocomplete="off" formControlName="longitude" matInput />
+          <mat-error>
+            <app-validators-messages labelName="Longitud" [controlVar]="form.get('longitude')">
+            </app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+        <p fxFlex="10%" style="margin-right: 1%;">Latitud:</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Latitud</mat-label>
+          <input type="text" autocomplete="off" formControlName="latitude" matInput />
+          <mat-error>
+            <app-validators-messages labelName="Latitud" [controlVar]="form.get('latitude')">
+            </app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+        <p fxFlex="10%" style="margin-right: 1%;">Registrado por:</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Ingrese el nombre del registrador</mat-label>
+          <input type="text" autocomplete="off" formControlName="registrarName" matInput />
+          <mat-error>
+            <app-validators-messages labelName="Nombre del registrador" [controlVar]="form.get('registrarName')">
+            </app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+        <p fxFlex="10%" style="margin-right: 1%;">Fecha:</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Ingrese la fecha</mat-label>
+          <input type="text" autocomplete="off" formControlName="registrationDate" matInput />
+          <mat-error>
+            <app-validators-messages labelName="Fecha" [controlVar]="form.get('registrationDate')">
+            </app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+        <p fxFlex="10%" style="margin-right: 1%;">Hora:</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Ingrese la hora</mat-label>
+          <input type="text" autocomplete="off" formControlName="registrationHour" matInput />
+          <mat-error>
+            <app-validators-messages labelName="Hora" [controlVar]="form.get('registrationHour')">
+            </app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <ng-container *ngIf="identifiedFlag">
+        <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+          <p fxFlex="10%" style="margin-right: 1%;">Identificado por:</p>
+          <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+            <mat-label>Ingrese el nombre del identificador</mat-label>
+            <input type="text" autocomplete="off" formControlName="identifierName" matInput />
+            <mat-error>
+              <app-validators-messages labelName="Nombre del indetificador" [controlVar]="form.get('identifierName')">
+              </app-validators-messages>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+          <p fxFlex="10%" style="margin-right: 1%;">Fecha:</p>
+          <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+            <mat-label>Ingrese la fecha</mat-label>
+            <input type="text" autocomplete="off" formControlName="identificationDate" matInput />
+            <mat-error>
+              <app-validators-messages labelName="Fecha" [controlVar]="form.get('identificationDate')">
+              </app-validators-messages>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+          <p fxFlex="10%" style="margin-right: 1%;">Hora:</p>
+          <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+            <mat-label>Ingrese la hora</mat-label>
+            <input type="text" autocomplete="off" formControlName="identificationHour" matInput />
+            <mat-error>
+              <app-validators-messages labelName="Hora" [controlVar]="form.get('identificationHour')">
+              </app-validators-messages>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </ng-container>
+    </div>
+  </form>
+
+  <div fxLayout="column" class="mt-7" style="margin-bottom: 30px;">
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="100px">
+      <div fxFlex="50" fxLayoutAlign="end">
+        <button class="action__button" mat-raised-button color="link" (click)="openModalDelete()">
+          Eliminar
+        </button>
+      </div>
+      <div fxFlex="50" fxLayoutAlign="start">
+        <button *ngIf="identifiedFlag" class="action__button d-flex justify-content-center" mat-raised-button color="primary" (click)="goToBack()">
+          Guardar
+        </button>
+        <button *ngIf="!identifiedFlag" class="action__button d-flex justify-content-center" mat-raised-button color="primary" (click)="openModalEdit()">
+          Editar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="!obsertavionIdentifyFlag">
+  <h1>Registro por Identificar</h1>
+  <form [formGroup]="form" fxLayout="column" fxLayoutAlign="center">
+    <div fxLayout="column">
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+        <p fxFlex="10%" style="margin-right: 1%;">Cantidad:</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Ingrese la cantidad</mat-label>
+          <input type="text" autocomplete="off" formControlName="individualCount" matInput />
+          <mat-error>
+            <app-validators-messages labelName="Cantidad" [controlVar]="form.get('individualCount')">
+            </app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start start">
+        <p fxFlex="10%" style="margin-right: 1%;margin-top: 20px;">Comentario:</p>
+        <mat-form-field fxFlex="89%" appearance="outline" class="full-width">
+          <mat-label>Ingrese comentario</mat-label>
+          <textarea type="text" autocomplete="off" formControlName="comment" matInput></textarea>
+          <mat-error>
+            <app-validators-messages labelName="Comentario" [controlVar]="form.get('comment')">
+            </app-validators-messages>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div fxLayout="column">
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start start">
+        <p fxFlex="10%" style="margin-right: 1%;margin-top: 20px;">Foto:</p>
+        <div class="container_img" style="width: 89%;height: 200px;">
+          <img [src]="imageUrl" alt="a" style="height: 100%;">
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+  <div fxLayout="column" class="mt-7" style="margin-bottom: 30px;">
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="100px">
+      <div fxFlex="50" fxLayoutAlign="end">
+        <button class="action__button" mat-raised-button color="link" (click)="openModalDelete()">
+          Eliminar
+        </button>
+      </div>
+      <div fxFlex="50" fxLayoutAlign="start">
+        <button class="action__button d-flex justify-content-center" mat-raised-button color="primary" (click)="openModalEdit()">
+          Editar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

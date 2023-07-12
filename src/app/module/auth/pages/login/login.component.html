@@ -1,0 +1,86 @@
+<div class="main__form">
+  <mat-card class="main__form__card py-5">
+    <div class="logo__box">
+     <h1>MuyunApp</h1>
+    </div>
+    <div class="container mt-5">
+      <h3 class="main__text">Iniciar sesión</h3>
+    </div>
+    <mat-card-content>
+      <form [formGroup]="registerForm">
+        <div
+          class="row align-items-center container__input mt-4"
+          style="margin-top: 10px"
+        >
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Usuario</mat-label>
+            <input
+              matInput
+              (input)="
+                registerForm
+                  .get('username_email')
+                  .setValue(
+                    registerForm.get('username_email').value.toLowerCase().trim()
+                  )
+              "
+              name="username_email"
+              formControlName="username_email"
+              required
+            />
+          </mat-form-field>
+        </div>
+        <div class="row align-items-center container__input">
+          <mat-form-field class="w-100" appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input
+              [type]="hide ? 'password' : 'text'"
+              matInput
+              (input)="
+                registerForm
+                  .get('password')
+                  .setValue(
+                    registerForm.get('password').value.trim()
+                  )
+              "
+              name="password"
+              formControlName="password"
+              required
+            />
+            <mat-icon style="cursor: pointer" matSuffix (click)="hide = !hide">
+              {{ hide ? "visibility_off" : "visibility" }}
+            </mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="row align-items-center container__input mt-3">
+          <a
+            style="text-decoration-line: underline; cursor: pointer"
+            (click)="goToForgotPass()"
+            >¿Olvidó su contraseña?</a
+          >
+        </div>
+        <div
+          class="row align-items-center container__input"
+          style="margin-top: 40px"
+        >
+          <button mat-button class="btn__enter" (click)="submit()">
+            ENTRAR
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div class="text__footer">
+  <p>
+    Copyright © {{ currentYear }} MUYUNAPP S.A.C. Todos los derechos
+    reservados
+  </p>
+</div>
+<div class="root__container__spinner" *ngIf="showSpinner">
+  <div class="contarier__spinner d-flex justify-content-center">
+    <div style="display: block">
+      <mat-spinner [diameter]="100" class="mat-spinner-color"></mat-spinner>
+      <h2 class="text__spinner">Cargando ...</h2>
+    </div>
+  </div>
+</div>

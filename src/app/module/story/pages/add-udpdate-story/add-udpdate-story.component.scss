@@ -1,0 +1,21 @@
+// Spinner Loading
+.root__container__spinner{
+  margin: 5.5px 0!important;
+}
+.mat-spinner-color-components::ng-deep circle{
+  stroke: #b9b9b9 !important;
+}
+.text__spinner {
+  margin: 20px 0 0 0!important;
+  color: #b9b9b9;
+}
+.mat-spinner-color-components-send::ng-deep circle{
+  stroke: #fff !important;
+  stroke-width: 15%!important;
+}
+textarea {
+  min-height: 100px;
+}
+.file-input {
+  display: none;
+}

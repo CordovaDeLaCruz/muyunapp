@@ -1,0 +1,8 @@
+<div class="main__correct">
+  <!-- <img src="/assets/img/upload__success.png" alt=""> -->
+  <mat-icon class="icon-display mb-4">check_circle_outline</mat-icon>
+  <p class="text__success">Los datos se {{message ? message : 'guardaron'}} satisfactoriamente</p>
+  <div class="container__btn">
+    <button mat-button class="btn__generate" [mat-dialog-close]="true">OK</button>
+  </div>
+</div>

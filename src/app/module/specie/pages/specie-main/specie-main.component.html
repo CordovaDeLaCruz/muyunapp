@@ -1,0 +1,237 @@
+<h1>Especies</h1>
+<div class="row container-filters">
+  <div
+    class="filter__input"
+    fxLayout="row"
+    fxLayoutAlign="start center"
+    fxFlex.xs="100%"
+    fxLayout.xs="column"
+    class="col-lg-8"
+    style="padding: 0"
+  >
+    <div class="row full-width">
+      <div
+        class="col-lg-12"
+        fxFlex.xs="100%"
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+        style="margin-bottom: 16px;padding-left: 0;"
+      >
+        <label for="search">Buscar</label>
+        <mat-form-field
+          class="mat-select-design mat-select-space"
+          [hideRequiredMarker]="true"
+          outline
+          appearance="outline"
+        >
+          <mat-label>
+            Ingrese el nombre vernacular o científico a buscar
+          </mat-label>
+          <input
+            [(ngModel)]="filters.filter"
+            (ngModelChange)="filterText($event)"
+            type="text"
+            name="search"
+            autocomplete="off"
+            matInput
+          />
+        </mat-form-field>
+      </div>
+      <div
+        class="col-lg-6"
+        fxFlex.xs="100%"
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+        style="padding-left: 0;"
+      >
+        <label for="profile">Clase</label>
+        <mat-form-field appearance="outline" class="mat-select-space mat-select-design">
+          <mat-label>Filtrar por Clase</mat-label>
+          <mat-select
+            [(ngModel)]="filters.class_specie"
+            (ngModelChange)="onSearchChange()"
+            >
+            <mat-option>
+              <strong>Seleccionar Clase</strong>
+            </mat-option>
+            <mat-option *ngFor="let class of classList" [value]="class.id">
+              {{ class.nameEnglish }} - {{ class.nameSpanish }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div
+        class="col-lg-6"
+        fxFlex.xs="100%"
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+      >
+        <label for="profile">Prevalence</label>
+        <mat-form-field appearance="outline" class="mat-select-space mat-select-design">
+          <mat-label>Filtrar por Prevalence</mat-label>
+          <mat-select
+            #allSelectPrevalence
+            [(ngModel)]="filters.prevalence_specie"
+            multiple>
+            <mat-option value="0" (click)="toggleAllSelectionPrevalence()">
+              <strong>Seleccionar Todo</strong>
+            </mat-option>
+            <mat-option (click)="togglePerOne()" *ngFor="let prevalence of prevalenceList" [value]="prevalence.id">
+              {{ prevalence.nameEnglish }} - {{ prevalence.nameSpanish }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div
+    class="col-lg-4"
+    fxLayout="row"
+    fxLayoutAlign="end start"
+    fxFlex.xs="100%"
+    style="padding: 0"
+    >
+      <button
+        [routerLink]="'add-specie'"
+        class="btn-style full-width"
+        mat-raised-button
+        color="accent"
+      >
+        Nueva Especie
+      </button>
+  </div>
+</div>
+
+
+
+<div class="mt-7" fxLayout="column">
+  <div fxFlex="100%">
+    <table mat-table [dataSource]="specieList" class="mat-elevation-z4">
+      <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+      <ng-container matColumnDef="classTaxonomy">
+        <th mat-header-cell *matHeaderCellDef>Clase</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.classTaxonomy && element.classTaxonomy.nameSpanish ? element.classTaxonomy.nameSpanish : '-' }}
+          ({{ element.classTaxonomy && element.classTaxonomy.nameEnglish ? element.classTaxonomy.nameEnglish : '-' }})
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="order">
+        <th mat-header-cell *matHeaderCellDef>Orden</th>
+        <td mat-cell *matCellDef="let element" class="no-select">
+          {{ element.order && element.order.nameSpanish ? element.order.nameSpanish : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="family">
+        <th mat-header-cell *matHeaderCellDef>Family</th>
+        <td mat-cell *matCellDef="let element" class="no-select">
+          {{ element.family && element.family.nameSpanish ? element.family.nameSpanish : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="genus">
+        <th mat-header-cell *matHeaderCellDef>Genus</th>
+        <td mat-cell *matCellDef="let element" class="no-select">
+          {{ element.genus && element.genus.nameSpanish ? element.genus.nameSpanish : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="scientificName">
+        <th mat-header-cell *matHeaderCellDef>Nombre Científico</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.scienticName ? element.scienticName : '-' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="vern_Esp">
+        <th mat-header-cell *matHeaderCellDef>Nombre Vernacular</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.vernacularNameSpanish ? element.vernacularNameSpanish : '-' }}
+          ({{ element.vernacularNameEnglish ? element.vernacularNameEnglish : '-' }})
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon class="pointer" (click)="gotToEditSpecie(element.id)">edit</mat-icon
+          >
+          <mat-icon
+            class="ml-2 pointer"
+            (click)="openModalDelete(element.id)"
+            >delete</mat-icon
+          >
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        (dblclick)="detailUser(row)"
+      ></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="9999" style="text-align: center;">
+          No hay usuarios existentes con los filtros aplicados
+        </td>
+      </tr>
+    </table>
+    <!-- <mat-paginator
+      class="mat-elevation-z4 mt-1"
+      [length]="usersLength"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      (nextPage)="changePage()"
+      aria-label="Seleccionar página"
+    >
+    </mat-paginator> -->
+    <pagination-template
+      class="container__pagination"
+      *ngIf="pages | paginate: { itemsPerPage: 1, currentPage: page }"
+      #pagination="paginationApi"
+      [maxSize]="5"
+      (pageChange)="onPageEvent($event)"
+    >
+      <div
+        *ngIf="!pagination.isFirstPage()"
+        (click)="pagination.previous()"
+        class="pagination-previous"
+        [class.disabled]="pagination.isFirstPage()"
+      >
+        <a>
+          <mat-icon class="mat-18"> keyboard_arrow_left </mat-icon>
+          Atrás
+        </a>
+      </div>
+      <div
+        *ngFor="let page of pagination.pages"
+        [class.current]="pagination.getCurrent() === page.value"
+      >
+        <a
+          class="container__number__page"
+          (click)="pagination.setCurrent(page.value)"
+          *ngIf="pagination.getCurrent() !== page.value"
+        >
+          <span>{{ page.label }}</span>
+        </a>
+        <div *ngIf="pagination.getCurrent() === page.value">
+          <span>{{ page.label }}</span>
+        </div>
+      </div>
+      <div
+        class="pagination-next"
+        *ngIf="!pagination.isLastPage()"
+        (click)="pagination.next()"
+        [class.disabled]="pagination.isLastPage()"
+      >
+        <a>
+          Siguiente
+          <mat-icon class="mat-18"> keyboard_arrow_right </mat-icon>
+        </a>
+      </div>
+    </pagination-template>
+  </div>
+</div>

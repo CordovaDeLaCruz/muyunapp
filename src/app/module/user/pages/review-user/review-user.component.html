@@ -1,0 +1,68 @@
+<h1 class="my-3">{{selectedUser?.lastName && getUserProfileLabel(selectedUser!.role)}}</h1>
+<fieldset class="groupbox-border">
+  <legend class="groupbox-border">Información</legend>
+  <div class="container__fieldSet">
+    <div fxLayout="column" class="px-5 py-2">
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+        <p fxFlex="10%">Código:</p>
+        <p fxFlex="90%">{{selectedUser?.code}}</p>
+      </div>
+    </div>
+    <div fxLayout="column" class="px-5 py-2">
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+        <p fxFlex="10%">Nombres:</p>
+        <p fxFlex="90%">{{selectedUser?.firstName}}</p>
+      </div>
+    </div>
+    <div fxLayout="column" class="px-5 py-2">
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+        <p fxFlex="10%">Apellidos:</p>
+        <p fxFlex="90%">{{selectedUser?.lastName}}</p>
+      </div>
+    </div>
+    <div fxLayout="column" class="px-5 py-2">
+      <div fxLayout="row" fxLayout.xs="column" fxFlex="100%" fxLayoutAlign="start center">
+        <p fxFlex="10%">Correo:</p>
+        <p fxFlex="90%">{{selectedUser?.email}}</p>
+      </div>
+    </div>
+  </div>
+</fieldset>
+<h1 class="my-3">Datos Recorrido</h1>
+<table mat-table [dataSource]="travels" class="mat-elevation-z1 mx-auto my-1">
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="guide">
+    <th mat-header-cell *matHeaderCellDef>Guía</th>
+    <td mat-cell *matCellDef="let element">{{ element.guide.firstname }} {{ element.guide.lastname }}</td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="route">
+    <th mat-header-cell *matHeaderCellDef>Ruta</th>
+    <td mat-cell *matCellDef="let element">{{ element.route }}</td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="travelTime">
+    <th mat-header-cell *matHeaderCellDef>Fecha y Hora</th>
+    <td mat-cell *matCellDef="let element">{{ getTravelTimeFormat(element.travelTime) }}</td>
+  </ng-container>
+
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<div fxLayout="column" class="mt-5">
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="100px">
+    <div fxFlex="50" fxLayoutAlign="end">
+      <button routerLink="/user" class="action__button" mat-raised-button color="link">
+        Volver
+      </button>
+    </div>
+  </div>
+</div>

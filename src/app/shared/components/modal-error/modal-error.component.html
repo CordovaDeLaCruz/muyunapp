@@ -1,0 +1,15 @@
+<div class="main__correct">
+  <!-- <img src="/assets/icons/icon__error.svg" alt=""> -->
+  <mat-icon class="icon-display mb-4">warning</mat-icon>
+  <p class="text__success">{{message}}</p>
+  <div class="container__btn">
+    <button
+      (click)="onNoClick()"
+      class="btn__search"
+      mat-button
+    >
+      Cancelar
+    </button>
+    <button mat-button class="btn__generate" [mat-dialog-close]="true">Si</button>
+  </div>
+</div>
